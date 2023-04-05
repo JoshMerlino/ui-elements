@@ -40,7 +40,7 @@ export default function Button({ children, className, variant = "glowing", rippl
 					"ring-primary"),
 	};
 	
-	const base = "rounded-md font-medium uppercase font-roboto tracking-[0.75px] duration-150 select-none appearance-none relative";
+	const base = "rounded-md font-medium uppercase font-roboto tracking-[0.75px] duration-150 select-none appearance-none relative overflow-hidden whitespace-nowrap";
 
 	return (
 		<button
