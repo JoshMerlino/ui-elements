@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { RefObject, useEffect } from "react";
-import "./index.css";
 
 export default function useRipple(ref: RefObject<HTMLElement>, state = true, className?: string) {
 	useEffect(function() {
