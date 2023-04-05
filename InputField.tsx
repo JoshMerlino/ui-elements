@@ -43,7 +43,7 @@ export default function InputField({ label, hint, className, height = "default",
 				className={ classNames(input, className) }
 				{ ...props } />
 			{ label && <label
-				className={ classNames(labelStyles, height === "large" && "top-7") }
+				className={ classNames(labelStyles, height === "large" && "top-[28px]") }
 				htmlFor={ props.id }>{label}</label> }
 
 			{ hint && <p
