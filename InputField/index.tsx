@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { InputHTMLAttributes, useEffect, useRef } from "react";
+import "./index.css";
 
 interface InputFieldProps {
 	height: "default" | "large";
@@ -39,7 +40,6 @@ export default function InputField({ label, hint, className, height = "default",
 		<div
 			className={ classNames(container, className, heights[height]) }
 			ref={ ref }>
-			<style>{":focus-visible { outline: none!important }"}</style>
 			<input
 				className={ classNames(input, height === "large" && "px-5 focus:px-[19px]", className) }
 				{ ...props } />
