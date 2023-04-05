@@ -1,11 +1,16 @@
 import classNames from "classnames";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useRef } from "react";
+import useRipple from "./util/useRipple";
 
 interface ButtonProps {
 	variant: "glowing" | "outlined" | "flat" | "raised";
+	ripple: boolean;
 }
 
-export default function Button({ children, className, variant = "glowing", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+export default function Button({ children, className, variant = "glowing", ripple = true, ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+
+	const ref = useRef<HTMLButtonElement>(null);
+	useRipple(ref, ripple, (variant === "outlined" || variant === "flat") ? "bg-primary" : "bg-white");
 
 	// Styles
 	const variants = {
@@ -25,6 +30,7 @@ export default function Button({ children, className, variant = "glowing", ...pr
 				variants[variant],
 				className
 			) }
+			ref={ ref }
 			{ ...props }>{children}</button>
 	);
 }
