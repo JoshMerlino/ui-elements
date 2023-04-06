@@ -15,7 +15,7 @@ export default function Checkbox({ children, className, color = "primary", ...pr
 	props.id = props.id || Math.floor(Math.random() * 1e10).toString(36);
 
 	// Styles
-	const container = "group flex items-center font-roboto gap-4 w-full";
+	const container = "group flex items-center font-roboto gap-4 grow basis-full";
 	const checkbox = classNames("peer appearance-none border-2 rounded-sm w-5 h-5 border-gray-500 dark:border-gray-600 checked:border-[10px] transition-all after:content[''] after:bg-gray-500/10 after:absolute after:w-12 after:h-12 after:left-1/2 after:top-1/2 after:rounded-full after:-translate-x-1/2 after:-translate-y-1/2 after:pointer-events-none after:-z-[1] after:scale-0 focus:after:scale-100 group-active:after:scale-100 duration-100 after:transition-transform active:border-gray-600 active:dark:border-gray-500 after:z-10",
 		color === "success" ? "checked:!border-success checked:after:bg-success/10" :
 			color === "error" ? "checked:!border-error checked:after:bg-error/10" :
