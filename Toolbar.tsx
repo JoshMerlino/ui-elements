@@ -22,7 +22,7 @@ export default function Toolbar({ children, className, htmlFor, ...props }: Part
 	});
 	
 	return (
-		<header className={ classNames("min-h-[64px] !overflow-visible z-40 sticky top-0 backdrop-blur-3xl transition-shadow bg-white dark:bg-gray-800 px-8 border-gray-200 dark:border-gray-700", className) }
+		<header className={ classNames("min-h-[64px] !overflow-visible z-40 sticky top-0 backdrop-blur-3xl transition-shadow bg-white dark:bg-gray-800 px-4 border-gray-200 dark:border-gray-700", className) }
 			ref={ ref }>
 			<div className="flex items-center gap-4 justify-between h-full !overflow-visible flex-wrap !flex-row"
 				{ ...props }>
