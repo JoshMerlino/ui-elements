@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { HTMLAttributes, useRef } from "react";
 import useRipple from "./util/useRipple";
 
-interface ButtonProps {
+export interface ButtonProps {
 	variant: "glowing" | "outlined" | "flat" | "raised";
 	color: "primary" | "error" | "success" | "warn"
 	ripple: boolean;

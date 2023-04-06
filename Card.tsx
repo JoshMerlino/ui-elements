@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { HTMLAttributes } from "react";
 
-interface CardProps {
+export interface CardProps {
 	variant: "default" | "outlined";
 }
 

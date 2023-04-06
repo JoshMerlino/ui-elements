@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { InputHTMLAttributes, useEffect, useRef } from "react";
 import "./index.css";
 
-interface InputFieldProps {
+export interface InputFieldProps {
 	height: "default" | "large";
 	label: string;
 	hint: string;

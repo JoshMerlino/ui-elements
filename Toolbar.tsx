@@ -2,12 +2,11 @@ import classNames from "classnames";
 import { HTMLAttributes, ReactNode, useRef } from "react";
 import useAnimation from "./util/useAnimation";
 
-export type ToolbarProps = {
+export interface ToolbarProps {
 	children: ReactNode;
 	className: string;
 	htmlFor: string;
-
-};
+}
 
 export default function Toolbar({ children, className, htmlFor, ...props }: Partial<ToolbarProps> & HTMLAttributes<HTMLDivElement>) {
 

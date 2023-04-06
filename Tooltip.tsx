@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { HTMLAttributes } from "react";
 
-interface Props {
+export interface TooltipProps {
 	anchor?: "top" | "bottom" | "left" | "right";
 }
 
-export default function Tooltip({ children, className, anchor = "top", ...props }: Props & HTMLAttributes<HTMLDivElement>) {
+export default function Tooltip({ children, className, anchor = "top", ...props }: TooltipProps & HTMLAttributes<HTMLDivElement>) {
 
 	const anchors = {
 		top: "top-full origin-top",

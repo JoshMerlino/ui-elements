@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useRef } from "react";
 import { MdCheck } from "react-icons/md";
 
-interface CheckboxProps {
+export interface CheckboxProps {
 	color: "primary" | "error" | "success" | "warn";
 }
 
