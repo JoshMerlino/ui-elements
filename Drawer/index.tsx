@@ -3,7 +3,7 @@ import { HTMLAttributes } from "react";
 
 export default function Drawer({ children, className, ...props }: HTMLAttributes<HTMLDivElement>): JSX.Element {
 	return (
-		<aside className={ classNames("bg-white dark:bg-gray-800 ease-in-out w-[300px] absolute top-0 h-full z-[10] shadow-md transition-[opacity,left] xl:left-0 flex flex-col p-2 py-4 rounded-r-xl", className) }
+		<aside className={ classNames("bg-white dark:bg-gray-800 ease-in-out w-[300px] h-full z-[10] shadow-md transition-[opacity] flex flex-col p-2 py-4 rounded-r-xl", className) }
 			{ ...props }>{children}</aside>
 	);
 }
