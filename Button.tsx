@@ -5,13 +5,13 @@ import useRipple from "./util/useRipple";
 export interface ButtonProps {
 	variant: "glowing" | "outlined" | "flat" | "raised";
 	color: "primary" | "error" | "success" | "warn"
-	ripple: boolean;
+	waves: boolean;
 }
 
-export default function Button({ children, className, variant = "glowing", ripple = true, color = "primary", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+export default function Button({ children, className, variant = "glowing", waves = true, color = "primary", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
 
 	const ref = useRef<HTMLButtonElement>(null);
-	useRipple(ref, ripple, (variant === "outlined" || variant === "flat") ? (
+	useRipple(ref, waves, (variant === "outlined" || variant === "flat") ? (
 		color === "success" ? "bg-success" :
 			color === "warn" ? "bg-warn" :
 				color === "error" ? "bg-error" :
