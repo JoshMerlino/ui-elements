@@ -54,7 +54,7 @@ export default function useRipple(ref: RefObject<HTMLElement>, state = true, cla
 			to = setTimeout(function() {
 				ripple.classList.add("animate-pulse");
 				ripple.classList.remove("scale-[.6]");
-			}, 450);
+			}, 450) as number;
 			
 		};
 
