@@ -1,10 +1,14 @@
 import classNames from "classnames";
 import { HTMLAttributes } from "react";
 
-export default function Drawer({ children, className, ...props }: HTMLAttributes<HTMLDivElement>): JSX.Element {
+export default function Drawer({ children, className, scrim, close, ...props }: Partial<{ scrim: boolean, close: () => void }> & HTMLAttributes<HTMLDivElement>): JSX.Element {
 	return (
-		<aside className={ classNames("bg-white dark:bg-gray-800 ease-in-out w-[300px] h-full z-[10] shadow-md transition-[opacity] flex flex-col p-2 py-4 rounded-r-xl", className) }
-			{ ...props }>{children}</aside>
+		<>
+			<aside className={ classNames("bg-white dark:bg-gray-800 ease-in-out w-[300px] h-full z-[10] shadow-md transition-[opacity] flex flex-col p-2 py-4 rounded-r-xl", className) }
+				{ ...props }>{children}</aside>
+			{ scrim && <div className="fixed inset-0 bg-black/10 z-[49] transition-[opacity] ease-in-out backdrop-blur-sm"
+				onClick={ close } /> }
+		</>
 	);
 }
 
