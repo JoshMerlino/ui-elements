@@ -8,7 +8,7 @@ export interface CardProps {
 export default function Card({ children, className, variant = "default", ...props }: Partial<CardProps> & HTMLAttributes<HTMLDivElement>): JSX.Element {
 	
 	// Styles
-	const base = "text-sm rounded-lg text-gray-600 bg-white dark:bg-gray-800 dark:text-gray-400 overflow-hidden flex flex-col p-4 gap-2 w-full";
+	const base = "text-sm rounded-lg text-gray-600 bg-white dark:bg-gray-800 dark:text-gray-400 overflow-hidden flex flex-col p-4 gap-2 w-full card group";
 
 	const variants = {
 		default: "shadow dark:shadow-black/20",
