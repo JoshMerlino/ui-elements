@@ -8,10 +8,10 @@ export interface TooltipProps {
 export default function Tooltip({ children, className, anchor = "top", ...props }: TooltipProps & HTMLAttributes<HTMLDivElement>) {
 
 	const anchors = {
-		top: "top-full origin-top my-2 mx-auto",
-		bottom: "bottom-full origin-bottom my-2 mx-auto",
-		left: "left-full origin-left mx-2 my-auto",
-		right: "right-full origin-right mx-2 my-auto"
+		top: "top-full origin-top my-2 mx-auto left-1/2 -translate-x-1/2",
+		bottom: "bottom-full origin-bottom my-2 mx-auto left-1/2 -translate-x-1/2",
+		left: "left-full origin-left mx-2 my-auto top-1/2 -translate-y-1/2",
+		right: "right-full origin-right mx-2 my-auto top-1/2 -translate-y-1/2"
 	};
 
 	return (
