@@ -6,9 +6,10 @@ export interface ButtonProps {
 	variant: "glowing" | "outlined" | "flat" | "raised";
 	color: "primary" | "error" | "success" | "warn"
 	waves: boolean;
+	size: "default" | "large";
 }
 
-export default function Button({ children, className, variant = "glowing", waves = true, color = "primary", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+export default function Button({ children, className, size = "default", variant = "glowing", waves = true, color = "primary", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
 
 	const ref = useRef<HTMLButtonElement>(null);
 	useRipple(ref, waves, (variant === "outlined" || variant === "flat") ? (
@@ -40,6 +41,11 @@ export default function Button({ children, className, variant = "glowing", waves
 				color === "error" ? "ring-error" :
 					"ring-primary"),
 	};
+
+	const sizes = {
+		default: "px-4 h-9 py-1 text-sm",
+		large: "px-6 h-11 py-2 text-base",
+	};
 	
 	const base = "rounded-md font-medium uppercase font-roboto tracking-[0.75px] duration-150 select-none appearance-none relative overflow-hidden whitespace-nowrap";
 
@@ -47,7 +53,7 @@ export default function Button({ children, className, variant = "glowing", waves
 		<button
 			className={ classNames(
 				base,
-				"px-4 h-9 py-1 text-sm",
+				sizes[size],
 				variants[variant],
 				className
 			) }
