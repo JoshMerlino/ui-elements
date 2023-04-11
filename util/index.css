@@ -11,3 +11,20 @@
 		transform: scale(.5);
 	}
 }
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+	@apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-gray-400 dark:bg-gray-600;
+}
+
+::-webkit-scrollbar-thumb:active {
+	@apply bg-gray-500;
+}
