@@ -22,7 +22,7 @@ export default function ThemeToggle({ provider = false, children, ...props }: { 
 		document.documentElement.classList.toggle("dark", isDark);
 
 		// change meta color
-		document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#1a202c" : "#fffff");
+		document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#18202f" : "#ffffff");
 		
 		// change apple icon
 		document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? iconDark : iconLight);
