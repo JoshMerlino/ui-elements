@@ -12,7 +12,7 @@ export default function Icon({ icon: Icon, waves = true, className, children, ..
 	const ref = useRef<HTMLDivElement>(null);
 	useCenteredRipple(ref, waves);
 	return (
-		<div className={ classNames("w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-500/10 hover:active:bg-gray-500/20 transition-colors group relative text-gray-800 dark:text-gray-200 ripple-center", className) }
+		<div className={ classNames("shrink-0 w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-500/10 hover:active:bg-gray-500/20 transition-colors group relative text-gray-800 dark:text-gray-200 ripple-center", className) }
 			ref={ ref }
 			{ ...props }>
 			{Icon && <Icon className="text-2xl" />}
