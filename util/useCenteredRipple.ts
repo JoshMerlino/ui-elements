@@ -75,9 +75,11 @@ export default function useRipple(ref: RefObject<HTMLElement>, state = true, cla
 		// Bind listeners
 		element.addEventListener("mousedown", onMouseDown);
 		document.addEventListener("mouseup", onMouseUp);
+		element.addEventListener("mouseleave", onMouseUp);
 		return function() {
 			element.removeEventListener("mousedown", onMouseDown);
 			document.removeEventListener("mouseup", onMouseUp);
+			element.removeEventListener("mouseleave", onMouseUp);
 		};
 		
 	}, [ className, ref, state ]);
