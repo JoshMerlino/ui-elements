@@ -4,12 +4,12 @@ import { IoChevronDown } from "react-icons/io5";
 
 export interface AccordianItemProps {
 	header: ReactNode;
-	defaultExpanded: boolean;
+	defaultChecked: boolean;
 }
 
-export default function AccordionItem({ children, className, header, defaultExpanded, ...props }: Partial<AccordianItemProps> & HTMLAttributes<HTMLLIElement>): JSX.Element {
+export default function AccordionItem({ children, className, header, defaultChecked, ...props }: Partial<AccordianItemProps> & HTMLAttributes<HTMLLIElement>): JSX.Element {
 	
-	const [ isActive, setActive ] = useState(defaultExpanded);
+	const [ isActive, setActive ] = useState(defaultChecked);
 
 	return (
 		<li className={ classNames("flex flex-col bg-white dark:bg-gray-800 transition-[margin,shadow,border-radius] shadow rounded-lg my-4", isActive && "shadow-md", className) }
