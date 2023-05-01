@@ -29,7 +29,7 @@ export default function Button({ children, className, size = "default", variant 
 		color === "warn" ? "text-warn hover:bg-warn/10 hover:active:bg-warn/20 focus:bg-warn/10" :
 			color === "error" ? "text-error hover:bg-error/10 hover:active:bg-error/20 focus:bg-error/10" :
 				color === "primary" ? "text-primary hover:bg-primary/10 hover:active:bg-primary/20 focus:bg-primary/10" :
-					"text-gray-500 hover:bg-gray-100 hover:active:bg-gray-200 focus:bg-gray-100";
+					"text-gray-500 hover:bg-gray-500/10 hover:active:bg-gray-500/20 focus:bg-gray-500/10";
 	
 	// Styles
 	const glowing = classNames("text-white shadow-md hover:shadow-lg", bgColor);
