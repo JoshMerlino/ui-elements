@@ -37,7 +37,7 @@ export default function Button({ children, className, size = "default", variant 
 	const variants = {
 		glowing,
 		flat,
-		raised: classNames(glowing.split(" ").filter(a => !a.includes("shadow-primary") && !a.includes("shadow-error") && !a.includes("shadow-warn") && !a.includes("shadow-success")).join(" "), "!shadow-black/20"),
+		raised: classNames(glowing.split(" ").filter(a => !a.includes("shadow-primary") && !a.includes("shadow-error") && !a.includes("shadow-warn") && !a.includes("shadow-success")).join(" "), "!shadow-black/10"),
 		outlined: classNames(flat, "ring-1", color === "success" ? "ring-success" :
 			color === "warn" ? "ring-warn" :
 				color === "error" ? "ring-error" :
