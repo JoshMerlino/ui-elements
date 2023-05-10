@@ -6,9 +6,11 @@ export interface ToolbarProps {
 	children: ReactNode;
 	className: string;
 	htmlFor: string;
+	transparentWhenFlat: boolean;
+	alwaysTransparent: boolean;
 }
 
-export default function Toolbar({ children, className, htmlFor, ...props }: Partial<ToolbarProps> & HTMLAttributes<HTMLDivElement>) {
+export default function Toolbar({ children, className, htmlFor, transparentWhenFlat, alwaysTransparent, ...props }: Partial<ToolbarProps> & HTMLAttributes<HTMLDivElement>) {
 
 	const ref = useRef<HTMLDivElement>(null);
 	useAnimation(function() {
@@ -19,6 +21,7 @@ export default function Toolbar({ children, className, htmlFor, ...props }: Part
 		ref.current?.classList.toggle("shadow-none", state);
 		ref.current?.classList.toggle("shadow-lg", !state);
 		ref.current?.classList.toggle("border-transparent", !state);
+		if (transparentWhenFlat) ref.current?.classList.toggle("!bg-transparent", alwaysTransparent ? true : state);
 	});
 	
 	return (
