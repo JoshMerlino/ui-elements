@@ -19,9 +19,9 @@ export default function ThemeToggle({
 	provider = false,
 	children,
 	bindDocument,
-	darkIcon = "@assets/apple-touch-icon-dark.png",
+	lightIcon,
+	darkIcon,
 	darkColor = colors.gray[800],
-	lightIcon = "@assets/apple-touch-icon.png",
 	lightColor = colors.white,
 	...props
 }: Partial<Props> & HTMLAttributes<HTMLDivElement>): JSX.Element | null {
@@ -43,7 +43,7 @@ export default function ThemeToggle({
 
 			// change apple icon
 			/* @vite-ignore */
-			document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", await import(isDark ? darkIcon : lightIcon));
+			if (darkIcon && lightIcon) document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? darkIcon : lightIcon);
 
 			// change meta color
 			document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? darkColor : lightColor);
