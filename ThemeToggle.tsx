@@ -7,7 +7,7 @@ import { MdOutlineBrightnessAuto, MdOutlineDarkMode } from "react-icons/md";
 
 export type Theme = "DARK" | "LIGHT" | "AUTO";
 
-export default function ThemeToggle({ provider = false, children, ...props }: { provider?: boolean, children?: ReactNode } & HTMLAttributes<HTMLDivElement>): JSX.Element | null {
+export default function ThemeToggle({ provider = false, children, bindDocument, ...props }: { provider?: boolean, children?: ReactNode, bindDocument?: boolean } & HTMLAttributes<HTMLDivElement>): JSX.Element | null {
 
 	// Determine initial state
 	const [ state, setState ] = useState<Theme>("theme" in localStorage ? localStorage.theme === "dark" ? "DARK" : "LIGHT" : "AUTO");
@@ -21,13 +21,16 @@ export default function ThemeToggle({ provider = false, children, ...props }: { 
 		// change body class
 		document.documentElement.classList.toggle("dark", isDark);
 
+		// If not binding to document, return
+		if (!bindDocument) return;
+
 		// change meta color
 		document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#18202f" : "#ffffff");
 		
 		// change apple icon
-		document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? iconDark : iconLight);
+		if (bindDocument) document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? iconDark : iconLight);
 		
-	}, [ state ]);
+	}, [ bindDocument, state ]);
 
 	// Attach keybinds
 	useEventListener("keydown", function(event: KeyboardEvent) {
