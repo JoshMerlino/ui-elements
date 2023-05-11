@@ -9,18 +9,22 @@ export interface Props {
 	provider: boolean;
 	children: ReactNode;
 	bindDocument: boolean;
-	darkIcon: string;
+	darkAppleIcon: string;
 	darkColor: string;
 	lightColor: string;
-	lightIcon: string;
+	lightFavicon: string;
+	darkFavicon: string;
+	lightAppleIcon: string;
 }
 
 export default function ThemeToggle({
 	provider = false,
 	children,
 	bindDocument,
-	lightIcon,
-	darkIcon,
+	lightAppleIcon,
+	lightFavicon,
+	darkFavicon,
+	darkAppleIcon,
 	darkColor = colors.gray[800],
 	lightColor = colors.white,
 	...props
@@ -39,18 +43,18 @@ export default function ThemeToggle({
 		document.documentElement.classList.toggle("dark", isDark);
 
 		// If not binding to document, return
-		if (bindDocument) async() => {
+		if (!bindDocument) return;
 
-			// change apple icon
-			/* @vite-ignore */
-			if (darkIcon && lightIcon) document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? darkIcon : lightIcon);
+		// change apple icon
+		if (darkAppleIcon && lightAppleIcon) document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? darkAppleIcon : lightAppleIcon);
 
-			// change meta color
-			document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? darkColor : lightColor);
-			
-		};
+		// Change favicon
+		if (darkFavicon && lightFavicon) document.querySelector("link[rel=icon]")?.setAttribute("href", isDark ? darkFavicon : lightFavicon);
+
+		// change meta color
+		if (darkColor && lightColor) document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? darkColor : lightColor);
 		
-	}, [ bindDocument, darkColor, darkIcon, lightColor, lightIcon, state ]);
+	}, [ bindDocument, darkColor, darkAppleIcon, lightColor, lightAppleIcon, state, darkFavicon, lightFavicon ]);
 
 	// Attach keybinds
 	useEventListener("keydown", function(event: KeyboardEvent) {
