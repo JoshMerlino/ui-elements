@@ -1,6 +1,4 @@
 import useEventListener from "@ui-elements/util/useEventListener";
-import iconDark from "assets/apple-touch-icon-dark.png";
-import iconLight from "assets/apple-touch-icon.png";
 import { HTMLAttributes, ReactNode, useEffect, useState } from "react";
 import { BsBrightnessHigh } from "react-icons/bs";
 import { MdOutlineBrightnessAuto, MdOutlineDarkMode } from "react-icons/md";
@@ -22,13 +20,15 @@ export default function ThemeToggle({ provider = false, children, bindDocument, 
 		document.documentElement.classList.toggle("dark", isDark);
 
 		// If not binding to document, return
-		if (!bindDocument) return;
+		if (bindDocument) async() => {
 
-		// change meta color
-		document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#18202f" : "#ffffff");
-		
-		// change apple icon
-		if (bindDocument) document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", isDark ? iconDark : iconLight);
+			// change apple icon
+			document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", await import(isDark ? "@assets/apple-touch-icon-dark.png" : "@assets/apple-touch-icon.png"));
+
+			// change meta color
+			document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#18202f" : "#ffffff");
+			
+		};
 		
 	}, [ bindDocument, state ]);
 
