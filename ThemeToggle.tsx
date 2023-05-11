@@ -42,6 +42,7 @@ export default function ThemeToggle({
 		if (bindDocument) async() => {
 
 			// change apple icon
+			/* @vite-ignore */
 			document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", await import(isDark ? darkIcon : lightIcon));
 
 			// change meta color
