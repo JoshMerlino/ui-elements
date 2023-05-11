@@ -2,10 +2,29 @@ import useEventListener from "@ui-elements/util/useEventListener";
 import { HTMLAttributes, ReactNode, useEffect, useState } from "react";
 import { BsBrightnessHigh } from "react-icons/bs";
 import { MdOutlineBrightnessAuto, MdOutlineDarkMode } from "react-icons/md";
+import colors from "tailwindcss/colors";
 
 export type Theme = "DARK" | "LIGHT" | "AUTO";
+export interface Props {
+	provider: boolean;
+	children: ReactNode;
+	bindDocument: boolean;
+	darkIcon: string;
+	darkColor: string;
+	lightColor: string;
+	lightIcon: string;
+}
 
-export default function ThemeToggle({ provider = false, children, bindDocument, ...props }: { provider?: boolean, children?: ReactNode, bindDocument?: boolean } & HTMLAttributes<HTMLDivElement>): JSX.Element | null {
+export default function ThemeToggle({
+	provider = false,
+	children,
+	bindDocument,
+	darkIcon = "@assets/apple-touch-icon-dark.png",
+	darkColor = colors.gray[800],
+	lightIcon = "@assets/apple-touch-icon.png",
+	lightColor = colors.white,
+	...props
+}: Partial<Props> & HTMLAttributes<HTMLDivElement>): JSX.Element | null {
 
 	// Determine initial state
 	const [ state, setState ] = useState<Theme>("theme" in localStorage ? localStorage.theme === "dark" ? "DARK" : "LIGHT" : "AUTO");
@@ -23,14 +42,14 @@ export default function ThemeToggle({ provider = false, children, bindDocument, 
 		if (bindDocument) async() => {
 
 			// change apple icon
-			document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", await import(isDark ? "@assets/apple-touch-icon-dark.png" : "@assets/apple-touch-icon.png"));
+			document.querySelector("link[rel=apple-touch-icon]")?.setAttribute("href", await import(isDark ? darkIcon : lightIcon));
 
 			// change meta color
-			document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#18202f" : "#ffffff");
+			document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? darkColor : lightColor);
 			
 		};
 		
-	}, [ bindDocument, state ]);
+	}, [ bindDocument, darkColor, darkIcon, lightColor, lightIcon, state ]);
 
 	// Attach keybinds
 	useEventListener("keydown", function(event: KeyboardEvent) {
@@ -57,13 +76,15 @@ export default function ThemeToggle({ provider = false, children, bindDocument, 
 	// If provider, don't render anything
 	if (provider) return null;
 
-	if (children) return <div onClick={ nextState }
-		{ ...props }>
-		{ state === "AUTO" && <MdOutlineBrightnessAuto className="w-6 h-6" /> }
-		{ state === "LIGHT" && <BsBrightnessHigh className="w-6 h-6" /> }
-		{ state === "DARK" && <MdOutlineDarkMode className="w-6 h-6" /> }
-		{children}
-	</div>;
+	if (children) return (
+		<div onClick={ nextState }
+			{ ...props }>
+			{ state === "AUTO" && <MdOutlineBrightnessAuto className="w-6 h-6" /> }
+			{ state === "LIGHT" && <BsBrightnessHigh className="w-6 h-6" /> }
+			{ state === "DARK" && <MdOutlineDarkMode className="w-6 h-6" /> }
+			{children}
+		</div>
+	);
 
 	return (
 		<div className="btn"
