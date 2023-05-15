@@ -10,7 +10,7 @@ interface DrawerItemProps {
 	size: "default" | "dense"
 }
 
-export default function DrawerItem({ children, icon: Icon, active, waves = true, size = "default", ...props }: Partial<DrawerItemProps> & HTMLAttributes<HTMLDivElement>) {
+export default function DrawerItem({ children, icon: Icon, waves = true, size = "default", ...props }: Partial<DrawerItemProps> & HTMLAttributes<HTMLDivElement>) {
 
 	// Initialize the ref
 	const ref = useRef<HTMLDivElement>(null);
