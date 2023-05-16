@@ -8,8 +8,9 @@ export default function Modal({ children, open = false, className }: PropsWithCh
 	const ref = createRef<HTMLDialogElement>();
 	useEffect(function() {
 		if (!ref.current) return;
-		if (open) setContentVisible(true);
-		if (!open) setTimeout(function() {
+		if (open) {
+			setContentVisible(true);
+		} else if (!open) setTimeout(function() {
 			setContentVisible(false);
 		}, 250);
 	}, [ open, ref ]);
