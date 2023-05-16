@@ -39,3 +39,7 @@ body {
 :focus {
     outline-width: 0px;
 }
+
+button > * {
+	pointer-events: none;
+}
