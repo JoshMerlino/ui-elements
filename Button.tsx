@@ -16,7 +16,8 @@ export default function Button({ children, className, size = "default", variant 
 		color === "success" ? "bg-success" :
 			color === "warn" ? "bg-warn" :
 				color === "error" ? "bg-error" :
-					"bg-primary"
+					color === "gray" ? "bg-gray-500" :
+						"bg-primary"
 	) : "bg-white");
 
 	const bgColor = color === "success" ? "bg-success-600 hover:bg-success-700 focus:bg-success-700 active:bg-success-800 !shadow-success-800/50" :
