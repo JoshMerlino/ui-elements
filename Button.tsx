@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { HTMLAttributes, useRef } from "react";
+import Spinner from "./Spinner";
 import useRipple from "./util/useRipple";
 
 export interface ButtonProps {
@@ -7,9 +8,10 @@ export interface ButtonProps {
 	color: "primary" | "error" | "success" | "warn" | "gray";
 	waves: boolean;
 	size: "default" | "large";
+	loading: boolean;
 }
 
-export default function Button({ children, className, size = "default", variant = "glowing", waves = true, color = "primary", ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+export default function Button({ children, className, size = "default", variant = "glowing", waves = true, color = "primary", loading = false, ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
 
 	const ref = useRef<HTMLButtonElement>(null);
 	useRipple(ref, waves, (variant === "outlined" || variant === "flat") ? (
@@ -33,7 +35,7 @@ export default function Button({ children, className, size = "default", variant 
 					"text-gray-700 dark:text-gray-300 hover:bg-gray-500/10 hover:active:bg-gray-500/20 focus:bg-gray-500/10";
 	
 	// Styles
-	const glowing = classNames("text-white shadow-md hover:shadow-lg", bgColor);
+	const glowing = classNames("text-white shadow-md hover:shadow-lg stroke-white", bgColor);
 	const flat = classNames("bg-transparent", flatColor);
 	const variants = {
 		glowing,
@@ -51,7 +53,7 @@ export default function Button({ children, className, size = "default", variant 
 		large: "px-6 h-11 py-2 text-base",
 	};
 	
-	const base = "rounded-md font-medium uppercase font-roboto tracking-[0.75px] duration-150 select-none appearance-none relative overflow-hidden whitespace-nowrap";
+	const base = "rounded-md font-medium uppercase font-roboto tracking-[0.75px] duration-150 select-none appearance-none relative overflow-hidden whitespace-nowrap flex items-center gap-2";
 
 	return (
 		<button
@@ -59,9 +61,19 @@ export default function Button({ children, className, size = "default", variant 
 				base,
 				sizes[size],
 				variants[variant],
-				className
+				className,
+				loading && "opacity-75 pointer-events-none",
 			) }
 			ref={ ref }
-			{ ...props }>{children}</button>
+			{ ...props }>
+			{loading && <Spinner className={ classNames("shrink-0", size === "large" ? "w-8" : "w-5", (variant === "flat" || variant === "outlined") ? (
+				color === "success" ? "stroke-success" :
+					color === "warn" ? "stroke-warn" :
+						color === "error" ? "stroke-error" :
+							color === "primary" ? "stroke-primary" :
+								"stroke-gray-500"
+			) : "stroke-white") } />}
+			{ children }
+		</button>
 	);
 }
