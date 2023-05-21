@@ -9,9 +9,10 @@ export interface ButtonProps {
 	waves: boolean;
 	size: "default" | "large";
 	loading: boolean;
+	disabled: boolean;
 }
 
-export default function Button({ children, className, size = "default", variant = "glowing", waves = true, color = "primary", loading = false, ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
+export default function Button({ children, className, size = "default", variant = "glowing", waves = true, color = "primary", loading = false, disabled = false, ...props }: Partial<ButtonProps & { type: "button" | "submit" | "reset" }> & HTMLAttributes<HTMLButtonElement>) {
 
 	const ref = useRef<HTMLButtonElement>(null);
 	useRipple(ref, waves, (variant === "outlined" || variant === "flat") ? (
@@ -63,6 +64,7 @@ export default function Button({ children, className, size = "default", variant 
 				variants[variant],
 				className,
 				loading && "opacity-75 pointer-events-none",
+				disabled && "opacity-50 pointer-events-none grayscale",
 			) }
 			ref={ ref }
 			{ ...props }>
