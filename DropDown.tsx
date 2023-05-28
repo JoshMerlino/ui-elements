@@ -3,6 +3,7 @@ import InputField, { InputFieldProps } from "@ui-elements/InputField";
 import classNames from "classnames";
 import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import { uuid } from "../util/uuid";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export default function DropDown({ options, className, ...props }: { options: string[]; } & Partial<InputFieldProps> & HTMLAttributes<HTMLInputElement>) {
 
@@ -56,6 +57,7 @@ export default function DropDown({ options, className, ...props }: { options: st
 				{options
 
 					// Sort by active
+					.sort()
 					.sort((a, b) => {
 						if (a === props.defaultValue) return -1;
 						if (b === props.defaultValue) return 1;
@@ -69,6 +71,10 @@ export default function DropDown({ options, className, ...props }: { options: st
 					))}
 
 			</Card>
+
+			<div className={ classNames("absolute top-0 right-0 flex items-center justify-center pointer-events-none opacity-50", props.height === "large" ? "h-14 px-4" : "h-10 px-2") }>
+				<IoMdArrowDropdown className="text-base" />
+			</div>
 
 		</div>
 	);
