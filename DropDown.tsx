@@ -2,8 +2,8 @@ import Card from "@ui-elements/Card";
 import InputField, { InputFieldProps } from "@ui-elements/InputField";
 import classNames from "classnames";
 import { HTMLAttributes, useEffect, useRef, useState } from "react";
-import { uuid } from "../util/uuid";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { uuid } from "../util/uuid";
 
 export default function DropDown({ options, className, ...props }: { options: string[]; } & Partial<InputFieldProps> & HTMLAttributes<HTMLInputElement>) {
 
@@ -19,18 +19,21 @@ export default function DropDown({ options, className, ...props }: { options: st
 		if (!ref.current) return;
 
 		// Close the popover when clicking outside of it
-		function close(event: MouseEvent) {
+		function close(event: Event) {
 			if (ref.current?.contains(event.target as Node)) return;
 			setOpen(false);
 		}
 
 		// Add the event listener
-		document.addEventListener("click", close);
+		document.addEventListener("mousedown", close);
+
+		// Close when a different dropdown is opened
+		document.addEventListener("focusin", close);
 
 		// Remove the event listener
-		return () => document.removeEventListener("click", close);
+		return () => document.removeEventListener("mousedown", close);
 
-	}, []);
+	}, [ open, options ]);
 
 	function change(option: string) {
 		setOpen(false);
@@ -47,11 +50,12 @@ export default function DropDown({ options, className, ...props }: { options: st
 			<InputField
 				className={ classNames(className) }
 				id={ id }
-				onFocus={ () => setOpen(true) }
+				onFocus={ _ => setOpen(true) }
+				readOnly
 				{ ...props } />
 
 			{/* Popover */}
-			<Card className={ classNames("absolute top-0 transition-all z-10 !px-0 !gap-0", open ? "opacity-100 py-2" : "opacity-0 pointer-events-none py-0", open && props.label && "-mt-2") }>
+			<Card className={ classNames("absolute top-0 transition-all z-10 !px-0 !gap-0 !text-gray-800 dark:!text-gray-200", open ? "opacity-100 py-2" : "opacity-0 pointer-events-none py-0", open && props.label && "-mt-2") }>
 
 				{/* Options */}
 				{options
@@ -65,9 +69,11 @@ export default function DropDown({ options, className, ...props }: { options: st
 					})
 
 					.map((option, index) => (
-						<div className={ classNames(open ? props.height === "large" ? "h-14" : "h-10" : props.height === "large" ? "h-12" : "h-9", "hover:bg-gray/10 transition-[height] flex items-center px-3.5 active:bg-gray/20 font-medium text-sm") }
+						<option className={ classNames(open ? props.height === "large" ? "h-14" : "h-10" : props.height === "large" ? "h-12" : "h-9", "hover:bg-gray/10 focus:bg-gray/10 transition-[height] flex items-center px-3.5 active:bg-gray/20 font-medium text-sm") }
 							key={ index }
-							onClick={ () => change(option) }>{option}</div>
+							onClick={ () => change(option) }
+							onKeyDown={ event => event.key === "Enter" && change(option) }
+							tabIndex={ open ? 0 : -1 }>{option}</option>
 					))}
 
 			</Card>
